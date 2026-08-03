@@ -1,0 +1,3035 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+Africa Investment | Dashboard
+</title>
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+/* =====================================================
+   AFRICA INVESTMENT DASHBOARD V3
+   BASE CSS
+===================================================== */
+
+/* RESET */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+font-size:16px;
+}
+
+body{
+
+font-family:"Inter",sans-serif;
+
+background:
+linear-gradient(135deg,#07111d 0%,#102345 100%);
+
+color:#ffffff;
+
+overflow-x:hidden;
+
+min-height:100vh;
+
+}
+
+/* VARIABLES */
+
+:root{
+
+--primary:#2d83ff;
+
+--primary2:#40b5ff;
+
+--green:#00d26a;
+
+--red:#ff4d57;
+
+--orange:#f6b31a;
+
+--bg:#07111d;
+
+--sidebar:#0d182a;
+
+--card:#121f34;
+
+--card-hover:#172844;
+
+--border:rgba(255,255,255,.05);
+
+--text:#ffffff;
+
+--muted:#9aa8c2;
+
+--radius:20px;
+
+--transition:.30s;
+
+}
+
+/* LIENS */
+
+a{
+
+text-decoration:none;
+
+color:inherit;
+
+}
+
+/* LAYOUT */
+
+.container{
+
+display:grid;
+
+grid-template-columns:220px 1fr;
+
+width:100%;
+
+min-height:100vh;
+
+overflow:hidden;
+
+}
+
+/* SIDEBAR */
+
+.sidebar{
+
+background:var(--sidebar);
+
+border-right:1px solid var(--border);
+
+padding:22px;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:space-between;
+
+}
+
+/* LOGO */
+
+.logo{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+margin-bottom:35px;
+
+}
+
+.logo-icon{
+
+width:50px;
+
+height:50px;
+
+border-radius:15px;
+
+background:
+
+linear-gradient(135deg,
+
+var(--primary),
+
+#21c7ff);
+
+box-shadow:
+
+0 10px 25px rgba(0,120,255,.35);
+
+}
+
+.logo h1{
+
+font-size:32px;
+
+font-weight:800;
+
+line-height:1;
+
+}
+
+.logo span{
+
+display:block;
+
+margin-top:6px;
+
+font-size:11px;
+
+letter-spacing:5px;
+
+color:#79b7ff;
+
+}
+
+/* MENU */
+
+.menu{
+
+display:flex;
+
+flex-direction:column;
+
+gap:8px;
+
+}
+
+.menu-item{
+
+display:flex;
+
+align-items:center;
+
+gap:14px;
+
+padding:14px 18px;
+
+border-radius:16px;
+
+font-size:17px;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:var(--transition);
+
+}
+
+.menu-item:hover{
+
+background:#17345d;
+
+}
+
+.menu-item.active{
+
+background:
+
+linear-gradient(135deg,
+
+var(--primary),
+
+#4aa8ff);
+
+box-shadow:
+
+0 15px 35px rgba(0,120,255,.30);
+
+}
+
+/* SUPPORT */
+
+.support-box{
+
+margin-top:25px;
+
+padding:18px;
+
+border-radius:18px;
+
+background:#16243a;
+
+border:1px solid var(--border);
+
+}
+
+.support-box h3{
+
+font-size:17px;
+
+margin-bottom:8px;
+
+}
+
+.support-box p{
+
+font-size:13px;
+
+line-height:1.6;
+
+color:var(--muted);
+
+}
+
+.support-btn{
+
+width:100%;
+
+margin-top:15px;
+
+padding:12px;
+
+border:none;
+
+border-radius:14px;
+
+background:
+
+linear-gradient(135deg,
+
+var(--primary),
+
+#4aa8ff);
+
+color:white;
+
+font-size:15px;
+
+font-weight:700;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.support-btn:hover{
+
+transform:translateY(-2px);
+
+}
+
+/* MAIN */
+
+.main{
+
+padding:24px;
+
+width:100%;
+
+min-width:0;
+
+overflow:hidden;
+
+}
+/* =====================================================
+   TOPBAR
+===================================================== */
+
+.topbar{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+gap:20px;
+
+margin-bottom:25px;
+
+width:100%;
+
+}
+
+/* BIENVENUE */
+
+.welcome{
+
+flex:1;
+
+min-width:0;
+
+}
+
+.welcome h2{
+
+font-size:28px;
+
+font-weight:800;
+
+line-height:1.2;
+
+margin-bottom:6px;
+
+white-space:nowrap;
+
+overflow:hidden;
+
+text-overflow:ellipsis;
+
+}
+
+.welcome p{
+
+font-size:14px;
+
+color:var(--muted);
+
+}
+
+/* DROITE */
+
+.top-right{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+flex-shrink:0;
+
+}
+
+/* BADGE */
+
+.verified{
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+padding:10px 18px;
+
+border-radius:50px;
+
+background:rgba(0,210,106,.10);
+
+border:1px solid rgba(0,210,106,.20);
+
+color:#76ffba;
+
+font-size:14px;
+
+font-weight:700;
+
+white-space:nowrap;
+
+}
+
+/* PROFIL */
+
+.profile{
+
+display:flex;
+
+align-items:center;
+
+gap:14px;
+
+padding:12px 18px;
+
+background:var(--card);
+
+border:1px solid var(--border);
+
+border-radius:18px;
+
+min-width:280px;
+
+transition:.30s;
+
+}
+
+.profile:hover{
+
+background:var(--card-hover);
+
+}
+
+/* PHOTO */
+
+.avatar{
+
+width:52px;
+
+height:52px;
+
+border-radius:50%;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+background:linear-gradient(135deg,var(--primary),#27b8ff);
+
+color:white;
+
+font-size:18px;
+
+font-weight:800;
+
+flex-shrink:0;
+
+}
+
+/* NOM */
+
+.profile-info{
+
+display:flex;
+
+flex-direction:column;
+
+overflow:hidden;
+
+}
+
+.profile-name{
+
+font-size:15px;
+
+font-weight:700;
+
+white-space:nowrap;
+
+overflow:hidden;
+
+text-overflow:ellipsis;
+
+}
+
+.profile-role{
+
+margin-top:4px;
+
+font-size:13px;
+
+color:var(--orange);
+
+}
+
+/* TABLETTE */
+
+@media(max-width:1100px){
+
+.topbar{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+}
+
+.top-right{
+
+width:100%;
+
+justify-content:space-between;
+
+}
+
+.profile{
+
+min-width:0;
+
+width:100%;
+
+}
+
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+.topbar{
+
+gap:18px;
+
+}
+
+.welcome h2{
+
+font-size:22px;
+
+white-space:normal;
+
+}
+
+.welcome p{
+
+font-size:13px;
+
+}
+
+.top-right{
+
+flex-direction:column;
+
+align-items:stretch;
+
+gap:12px;
+
+}
+
+.verified{
+
+width:100%;
+
+}
+
+.profile{
+
+width:100%;
+
+padding:12px 15px;
+
+}
+
+.avatar{
+
+width:46px;
+
+height:46px;
+
+font-size:16px;
+
+}
+
+.profile-name{
+
+font-size:14px;
+
+}
+
+.profile-role{
+
+font-size:12px;
+
+}
+
+}
+/* =====================================================
+   DASHBOARD CARDS
+===================================================== */
+
+.cards{
+
+display:grid;
+
+grid-template-columns:repeat(2,minmax(0,1fr));
+
+gap:16px;
+
+margin-bottom:25px;
+
+width:100%;
+
+}
+
+/* CARTE */
+
+.card{
+
+position:relative;
+
+background:linear-gradient(180deg,#121f34,#16253d);
+
+border:1px solid var(--border);
+
+border-radius:18px;
+
+padding:18px;
+
+min-height:145px;
+
+overflow:hidden;
+
+transition:.30s;
+
+}
+
+.card:hover{
+
+transform:translateY(-4px);
+
+background:#1a2b47;
+
+box-shadow:0 15px 35px rgba(0,0,0,.25);
+
+}
+
+.card::before{
+
+content:"";
+
+position:absolute;
+
+width:120px;
+
+height:120px;
+
+border-radius:50%;
+
+background:rgba(45,131,255,.08);
+
+right:-40px;
+
+top:-40px;
+
+}
+
+/* TITRE */
+
+.card-title{
+
+position:relative;
+
+font-size:13px;
+
+font-weight:600;
+
+color:var(--muted);
+
+margin-bottom:10px;
+
+}
+
+/* VALEUR */
+
+.card-value{
+
+position:relative;
+
+font-size:30px;
+
+font-weight:800;
+
+line-height:1;
+
+margin-bottom:14px;
+
+}
+
+.usd{
+
+font-size:15px;
+
+font-weight:700;
+
+color:#7fc2ff;
+
+}
+
+/* BAS */
+
+.bottom-info{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+gap:10px;
+
+font-size:12px;
+
+color:var(--muted);
+
+}
+
+.bottom-info span:last-child{
+
+font-weight:700;
+
+}
+
+.green{
+
+color:var(--green);
+
+}
+
+.red{
+
+color:var(--red);
+
+}
+
+.purple{
+
+color:#ca7cff;
+
+}
+
+.highlight{
+
+color:#68b6ff;
+
+}
+
+/* TABLETTE */
+
+@media(max-width:900px){
+
+.cards{
+
+gap:14px;
+
+}
+
+.card{
+
+padding:16px;
+
+min-height:135px;
+
+}
+
+.card-value{
+
+font-size:26px;
+
+}
+
+}
+
+/* MOBILE */
+
+@media(max-width:650px){
+
+.cards{
+
+grid-template-columns:repeat(2,1fr);
+
+gap:12px;
+
+}
+
+.card{
+
+padding:14px;
+
+min-height:120px;
+
+border-radius:16px;
+
+}
+
+.card-title{
+
+font-size:11px;
+
+}
+
+.card-value{
+
+font-size:22px;
+
+}
+
+.usd{
+
+font-size:12px;
+
+}
+
+.bottom-info{
+
+font-size:10px;
+
+}
+
+}
+
+/* PETITS TELEPHONES */
+
+@media(max-width:360px){
+
+.cards{
+
+grid-template-columns:1fr;
+
+}
+
+}
+responsive:true,
+maintainAspectRatio:false,
+
+elements:{
+
+line:{
+
+borderWidth:2,
+
+tension:0.45
+
+},
+
+point:{
+
+radius:2,
+
+hoverRadius:5
+
+}
+
+},
+
+plugins:{
+
+legend:{
+
+display:false
+
+}
+
+}
+/* =====================================================
+   ACTIVITÉ RÉCENTE
+===================================================== */
+
+.activity-box{
+
+display:flex;
+
+flex-direction:column;
+
+gap:10px;
+
+}
+
+/* LIGNE */
+
+.activity-item{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+gap:12px;
+
+padding:12px 0;
+
+border-bottom:1px solid rgba(255,255,255,.06);
+
+}
+
+.activity-item:last-child{
+
+border:none;
+
+padding-bottom:0;
+
+}
+
+/* GAUCHE */
+
+.activity-left{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+flex:1;
+
+min-width:0;
+
+}
+
+/* ICÔNE */
+
+.activity-icon{
+
+width:42px;
+
+height:42px;
+
+border-radius:12px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:18px;
+
+background:#182944;
+
+flex-shrink:0;
+
+}
+
+.activity-icon.green{
+
+background:rgba(0,210,106,.12);
+
+color:var(--green);
+
+}
+
+.activity-icon.blue{
+
+background:rgba(45,131,255,.12);
+
+color:var(--primary);
+
+}
+
+.activity-icon.orange{
+
+background:rgba(246,179,26,.12);
+
+color:var(--orange);
+
+}
+
+.activity-icon.red{
+
+background:rgba(255,82,82,.12);
+
+color:var(--red);
+
+}
+
+/* TEXTE */
+
+.activity-info{
+
+min-width:0;
+
+}
+
+.activity-title{
+
+font-size:14px;
+
+font-weight:700;
+
+white-space:nowrap;
+
+overflow:hidden;
+
+text-overflow:ellipsis;
+
+}
+
+.activity-date{
+
+margin-top:4px;
+
+font-size:12px;
+
+color:var(--muted);
+
+}
+
+/* DROITE */
+
+.activity-right{
+
+text-align:right;
+
+flex-shrink:0;
+
+}
+
+.activity-value{
+
+font-size:16px;
+
+font-weight:700;
+
+}
+
+.activity-status{
+
+margin-top:4px;
+
+font-size:11px;
+
+color:var(--muted);
+
+}
+
+/* BADGE */
+
+.badge{
+
+display:inline-flex;
+
+align-items:center;
+
+justify-content:center;
+
+padding:4px 10px;
+
+border-radius:20px;
+
+font-size:10px;
+
+font-weight:700;
+
+letter-spacing:.4px;
+
+}
+
+.badge.success{
+
+background:rgba(0,210,106,.15);
+
+color:var(--green);
+
+}
+
+.badge.pending{
+
+background:rgba(246,179,26,.15);
+
+color:var(--orange);
+
+}
+
+.badge.failed{
+
+background:rgba(255,82,82,.15);
+
+color:var(--red);
+
+}
+
+/* TABLETTE */
+
+@media(max-width:900px){
+
+.activity-title{
+
+font-size:13px;
+
+}
+
+.activity-value{
+
+font-size:15px;
+
+}
+
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+.activity-item{
+
+padding:10px 0;
+
+}
+
+.activity-icon{
+
+width:36px;
+
+height:36px;
+
+font-size:15px;
+
+border-radius:10px;
+
+}
+
+.activity-title{
+
+font-size:12px;
+
+}
+
+.activity-date{
+
+font-size:11px;
+
+}
+
+.activity-value{
+
+font-size:14px;
+
+}
+
+.activity-status{
+
+font-size:10px;
+
+}
+
+}
+
+/* PETITS TÉLÉPHONES */
+
+@media(max-width:400px){
+
+.activity-item{
+
+gap:8px;
+
+}
+
+.activity-icon{
+
+width:32px;
+
+height:32px;
+
+font-size:14px;
+
+}
+
+.activity-title{
+
+font-size:11px;
+
+}
+
+.activity-value{
+
+font-size:13px;
+
+}
+
+}
+/* =====================================================
+   HISTORIQUE DES INVESTISSEMENTS
+===================================================== */
+
+.history-box{
+
+background:var(--card);
+
+border:1px solid var(--border);
+
+border-radius:18px;
+
+padding:20px;
+
+margin-bottom:20px;
+
+overflow:hidden;
+
+}
+
+/* EN-TÊTE */
+
+.history-header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:18px;
+
+gap:15px;
+
+flex-wrap:wrap;
+
+}
+
+.history-title{
+
+font-size:18px;
+
+font-weight:700;
+
+}
+
+.history-count{
+
+padding:8px 14px;
+
+border-radius:30px;
+
+background:rgba(45,131,255,.12);
+
+color:#7fc2ff;
+
+font-size:12px;
+
+font-weight:700;
+
+}
+
+/* TABLEAU */
+
+.table-responsive{
+
+width:100%;
+
+overflow-x:auto;
+
+border-radius:14px;
+
+}
+
+.table-responsive::-webkit-scrollbar{
+
+height:6px;
+
+}
+
+.table-responsive::-webkit-scrollbar-thumb{
+
+background:#2d83ff;
+
+border-radius:20px;
+
+}
+
+table{
+
+width:100%;
+
+border-collapse:collapse;
+
+min-width:780px;
+
+}
+
+thead{
+
+background:#16263f;
+
+}
+
+th{
+
+padding:14px 12px;
+
+text-align:left;
+
+font-size:13px;
+
+font-weight:700;
+
+color:#b6c4d9;
+
+white-space:nowrap;
+
+}
+
+td{
+
+padding:15px 12px;
+
+font-size:13px;
+
+border-top:1px solid rgba(255,255,255,.05);
+
+white-space:nowrap;
+
+}
+
+tbody tr{
+
+transition:.25s;
+
+}
+
+tbody tr:hover{
+
+background:#182944;
+
+}
+
+/* MONTANTS */
+
+.amount-positive{
+
+color:var(--green);
+
+font-weight:700;
+
+}
+
+.amount-negative{
+
+color:var(--red);
+
+font-weight:700;
+
+}
+
+/* BADGES */
+
+.status{
+
+display:inline-flex;
+
+align-items:center;
+
+justify-content:center;
+
+padding:6px 12px;
+
+border-radius:20px;
+
+font-size:11px;
+
+font-weight:700;
+
+letter-spacing:.3px;
+
+}
+
+.status.success{
+
+background:rgba(0,210,106,.15);
+
+color:var(--green);
+
+}
+
+.status.pending{
+
+background:rgba(246,179,26,.15);
+
+color:var(--orange);
+
+}
+
+.status.failed{
+
+background:rgba(255,82,82,.15);
+
+color:var(--red);
+
+}
+
+/* TABLETTE */
+
+@media(max-width:900px){
+
+.history-box{
+
+padding:16px;
+
+}
+
+th,
+td{
+
+padding:12px 10px;
+
+font-size:12px;
+
+}
+
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+.history-header{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+}
+
+.history-title{
+
+font-size:16px;
+
+}
+
+.history-count{
+
+font-size:11px;
+
+}
+
+.table-responsive{
+
+overflow-x:auto;
+
+}
+
+table{
+
+min-width:700px;
+
+}
+
+}
+/* =====================================================
+   FOOTER PREMIUM
+===================================================== */
+
+.footer-security{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:15px;
+
+margin-top:20px;
+
+}
+
+.security-item{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+padding:16px;
+
+background:var(--card);
+
+border:1px solid var(--border);
+
+border-radius:16px;
+
+transition:.30s;
+
+}
+
+.security-item:hover{
+
+background:var(--card-hover);
+
+transform:translateY(-3px);
+
+}
+
+.security-icon{
+
+width:46px;
+
+height:46px;
+
+border-radius:14px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:20px;
+
+background:linear-gradient(135deg,var(--primary),#4cb4ff);
+
+color:white;
+
+flex-shrink:0;
+
+}
+
+.security-title{
+
+font-size:14px;
+
+font-weight:700;
+
+margin-bottom:4px;
+
+}
+
+.security-desc{
+
+font-size:12px;
+
+color:var(--muted);
+
+line-height:1.4;
+
+}
+
+/* =====================================================
+   BOUTONS
+===================================================== */
+
+button{
+
+font-family:inherit;
+
+transition:.30s;
+
+}
+
+.btn,
+.support-btn,
+.action-btn{
+
+display:inline-flex;
+
+align-items:center;
+
+justify-content:center;
+
+gap:8px;
+
+padding:12px 18px;
+
+border:none;
+
+border-radius:14px;
+
+background:linear-gradient(135deg,var(--primary),#4aa8ff);
+
+color:#fff;
+
+font-size:14px;
+
+font-weight:700;
+
+cursor:pointer;
+
+}
+
+.btn:hover,
+.support-btn:hover,
+.action-btn:hover{
+
+transform:translateY(-2px);
+
+box-shadow:0 10px 25px rgba(45,131,255,.30);
+
+}
+
+.btn:active,
+.support-btn:active,
+.action-btn:active{
+
+transform:scale(.98);
+
+}
+
+/* =====================================================
+   ANIMATIONS
+===================================================== */
+
+@keyframes fadeUp{
+
+from{
+
+opacity:0;
+
+transform:translateY(18px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+.topbar{
+
+animation:fadeUp .45s ease;
+
+}
+
+.cards{
+
+animation:fadeUp .60s ease;
+
+}
+
+.content-grid{
+
+animation:fadeUp .75s ease;
+
+}
+
+.history-box{
+
+animation:fadeUp .90s ease;
+
+}
+
+.footer-security{
+
+animation:fadeUp 1.05s ease;
+
+}
+
+/* =====================================================
+   SCROLLBAR
+===================================================== */
+
+::-webkit-scrollbar{
+
+width:8px;
+
+height:8px;
+
+}
+
+::-webkit-scrollbar-track{
+
+background:#081320;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+background:#2d83ff;
+
+border-radius:20px;
+
+}
+
+/* =====================================================
+   RESPONSIVE FINAL
+===================================================== */
+
+@media(max-width:1100px){
+
+.footer-security{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:768px){
+
+.container{
+
+display:block;
+
+}
+
+.sidebar{
+
+width:100%;
+
+border-right:none;
+
+border-bottom:1px solid var(--border);
+
+}
+
+.main{
+
+padding:16px;
+
+}
+
+.footer-security{
+
+grid-template-columns:1fr;
+
+}
+
+.security-item{
+
+padding:14px;
+
+}
+
+}
+
+@media(max-width:480px){
+
+.logo h1{
+
+font-size:24px;
+
+}
+
+.menu-item{
+
+font-size:14px;
+
+padding:12px 14px;
+
+}
+
+.security-title{
+
+font-size:13px;
+
+}
+
+.security-desc{
+
+font-size:11px;
+
+}
+
+}
+/* =====================================================
+   PREMIUM UI
+===================================================== */
+
+/* FOND */
+
+body::before{
+
+content:"";
+
+position:fixed;
+
+top:-200px;
+
+right:-200px;
+
+width:500px;
+
+height:500px;
+
+border-radius:50%;
+
+background:radial-gradient(circle,#2d83ff22 0%,transparent 70%);
+
+pointer-events:none;
+
+z-index:-1;
+
+}
+
+body::after{
+
+content:"";
+
+position:fixed;
+
+bottom:-220px;
+
+left:-220px;
+
+width:520px;
+
+height:520px;
+
+border-radius:50%;
+
+background:radial-gradient(circle,#00d26a18 0%,transparent 70%);
+
+pointer-events:none;
+
+z-index:-1;
+
+}
+
+/* CARTES */
+
+.card,
+.chart-box,
+.activity-box,
+.history-box,
+.security-item,
+.profile,
+.support-box{
+
+backdrop-filter:blur(18px);
+
+-webkit-backdrop-filter:blur(18px);
+
+background:rgba(18,31,52,.88);
+
+border:1px solid rgba(255,255,255,.05);
+
+}
+
+/* OMBRE */
+
+.card,
+.chart-box,
+.activity-box,
+.history-box{
+
+box-shadow:
+
+0 12px 35px rgba(0,0,0,.22);
+
+}
+
+/* HOVER */
+
+.card:hover,
+.chart-box:hover,
+.activity-box:hover,
+.history-box:hover{
+
+box-shadow:
+
+0 20px 45px rgba(0,0,0,.28);
+
+}
+
+/* TITRES */
+
+.card-title,
+.box-title{
+
+letter-spacing:.3px;
+
+}
+
+/* BADGES */
+
+.status,
+.badge,
+.verified{
+
+backdrop-filter:blur(12px);
+
+}
+
+/* VALEURS */
+
+.card-value{
+
+letter-spacing:-1px;
+
+}
+
+/* TABLE */
+
+tbody tr{
+
+transition:.25s;
+
+}
+
+tbody tr:hover{
+
+transform:scale(1.01);
+
+}
+
+/* BOUTONS */
+
+.btn,
+.support-btn{
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+.btn::before,
+.support-btn::before{
+
+content:"";
+
+position:absolute;
+
+left:-120%;
+
+top:0;
+
+width:100%;
+
+height:100%;
+
+background:
+
+linear-gradient(
+
+90deg,
+
+transparent,
+
+rgba(255,255,255,.25),
+
+transparent
+
+);
+
+transition:.7s;
+
+}
+
+.btn:hover::before,
+.support-btn:hover::before{
+
+left:120%;
+
+}
+
+/* ANIMATION DES CARTES */
+
+.card{
+
+animation:cardAppear .45s ease;
+
+}
+
+@keyframes cardAppear{
+
+from{
+
+opacity:0;
+
+transform:translateY(20px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+/* SCROLL */
+
+html{
+
+scrollbar-color:#2d83ff #07111d;
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div>
+
+           <div class="logo">
+
+<div class="logo-icon"></div>
+
+<div>
+
+<h1>AFRICA</h1>
+
+<span>INVESTMENT</span>
+
+</div>
+
+</div>
+
+            <div class="menu">
+
+<div class="menu-item active"> Tableau de bord</div>
+
+<div class="menu-item"> Investissements</div>
+
+<a href="retrait.html" class="menu-item"> Retraits</a>
+
+<div class="menu-item"> Portefeuille</div>
+
+<div class="menu-item"> Historique</div>
+
+<div class="menu-item"> Parrainage</div>
+
+<div class="menu-item">⚙ Paramètres</div>
+
+<div class="menu-item"> Assistance</div>
+
+            </div>
+
+        </div>
+
+        <div class="support-box">
+
+<h3>Assistance Premium</h3>
+
+<p>
+
+Notre équipe financière reste disponible 24h/24 afin de vous accompagner.
+
+</p>
+
+<button class="support-btn">
+
+Contacter un conseiller
+
+</button>
+
+</div>
+
+    </aside>
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+        <!-- TOPBAR -->
+
+        <div class="topbar">
+
+<div class="welcome">
+
+<h2>Bonjour, Flavien Bernard 👋</h2>
+
+<p>Bienvenue sur votre espace sécurisé.</p>
+
+</div>
+
+<div class="top-right">
+
+<div class="verified">
+
+✔ Compte Vérifié
+
+</div>
+
+<div class="profile">
+
+<div class="avatar">
+
+FN
+
+</div>
+
+<div class="profile-info">
+
+<div class="profile-name">
+
+NSASI NGOMA Flavien Bernard
+
+</div>
+
+<div class="profile-role">
+
+⭐ Premium Investor
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+        <!-- DASHBOARD -->
+
+        <div class="cards">
+
+            <div class="card">
+
+                <div class="card-title">
+
+                    💼 Investissement total
+
+                </div>
+
+                <div class="card-value">
+
+                    2 100 <span class="usd">$</span>
+
+                </div>
+
+                <div class="bottom-info">
+
+                    <span>Capital investi</span>
+
+                    <span class="highlight">
+
+                        2 100 $
+
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <div class="card-title">
+
+                    📈 Gains réalisés
+
+                </div>
+
+                <div class="card-value">
+
+                    18 535 <span class="usd">$</span>
+
+                </div>
+
+                <div class="bottom-info">
+
+                    <span>Bénéfices</span>
+
+                    <span class="purple">
+
+                        +18 535 $
+
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <div class="card-title">
+
+                    💰 Solde disponible
+
+                </div>
+
+                <div class="card-value">
+
+                    20 635 <span class="usd">$</span>
+
+                </div>
+
+                <div class="bottom-info">
+
+                    <span>Disponible</span>
+
+                    <span class="green">
+
+                        20 635 $
+
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <div class="card-title">
+
+                    🔒 Statut
+
+                </div>
+
+                <div class="card-value red">
+
+                    NON ACTIVÉ
+
+                </div>
+
+                <div class="bottom-info">
+
+                    <span>Compte</span>
+
+                    <span style="color:#facc15;">
+
+                        Premium
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ==========================
+     CONTENU PRINCIPAL
+========================== -->
+
+<div class="content-grid">
+
+    <!-- GRAPHIQUE -->
+
+    <div class="chart-box">
+
+        <div class="box-title">
+
+            📈 Évolution du portefeuille
+
+        </div>
+
+    <div class="chart-container">
+
+<canvas id="chart"></canvas>
+
+</div>
+
+        <div style="margin-top:25px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:15px;">
+
+            <div>
+
+                <div style="color:#94a3b8;font-size:13px;">
+                    Investissement initial
+                </div>
+
+                <div style="font-size:24px;font-weight:700;color:#58a6ff;">
+                    2 100 $
+                </div>
+
+            </div>
+
+            <div>
+
+                <div style="color:#94a3b8;font-size:13px;">
+                    Rendement
+                </div>
+
+                <div style="font-size:24px;font-weight:700;color:#00d26a;">
+                    +883 %
+                </div>
+
+            </div>
+
+            <div>
+
+                <div style="color:#94a3b8;font-size:13px;">
+                    Solde actuel
+                </div>
+
+                <div style="font-size:24px;font-weight:700;color:white;">
+                    20 635 $
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ACTIVITÉS -->
+
+    <div class="activity-box">
+
+        <div class="box-title">
+
+            Activité récente
+
+        </div>
+
+        <div class="activity-item">
+
+            <div>
+
+                <div style="font-weight:700;">
+                    💵 Demande de retrait
+                </div>
+
+                <div style="margin-top:6px;color:#94a3b8;">
+                    M-Pesa RDC
+                </div>
+
+            </div>
+
+            <div class="red"
+            style="font-weight:700;">
+
+                -2 000 $
+
+            </div>
+
+        </div>
+
+        <div class="activity-item">
+
+            <div>
+
+                <div style="font-weight:700;">
+                    📈 Investissement Premium
+                </div>
+
+                <div style="margin-top:6px;color:#94a3b8;">
+                    08 Juillet 2026
+                </div>
+
+            </div>
+
+            <div class="green"
+            style="font-weight:700;">
+
+                +2 100 $
+
+            </div>
+
+        </div>
+
+        <div class="activity-item">
+
+            <div>
+
+                <div style="font-weight:700;">
+                    🎁 Rendement crédité
+                </div>
+
+                <div style="margin-top:6px;color:#94a3b8;">
+                    09 Juillet 2026
+                </div>
+
+            </div>
+
+            <div class="green"
+            style="font-weight:700;">
+
+                +18 535 $
+
+            </div>
+
+        </div>
+
+        <div class="activity-item">
+
+            <div>
+
+                <div style="font-weight:700;">
+                    🛡 Vérification du compte
+                </div>
+
+                <div style="margin-top:6px;color:#94a3b8;">
+                    Dernière vérification
+                </div>
+
+            </div>
+
+            <div style="font-weight:700;color:#ff5252;">
+
+                Non activé
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- ==========================
+     HISTORIQUE
+========================== -->
+
+<div class="history-box">
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;">
+
+        <div class="box-title">
+
+            📜 Historique des investissements
+
+        </div>
+
+        <div style="
+        background:#163560;
+        color:white;
+        padding:10px 18px;
+        border-radius:40px;
+        font-size:13px;
+        font-weight:700;">
+
+            3 Transactions
+
+        </div>
+
+    </div>
+
+    <div class="table-responsive">
+
+<table>
+
+        <thead>
+
+            <tr>
+
+                <th>ID</th>
+
+                <th>Pack</th>
+
+                <th>Montant</th>
+
+                <th>Date</th>
+
+                <th>Durée</th>
+
+                <th>Profit</th>
+
+                <th>Statut</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+
+                <td>
+
+                    <strong>#INV-2481</strong>
+
+                </td>
+
+                <td>
+
+                    Premium Gold
+
+                </td>
+
+                <td>
+
+                    2 100 $
+
+                </td>
+
+                <td>
+
+                    08 Juillet 2026
+
+                </td>
+
+                <td>
+
+                    7 jours
+
+                </td>
+
+                <td class="green">
+
+                    +18 535 $
+
+                </td>
+
+                <td>
+
+                    <span class="status green">
+
+                        TERMINÉ
+
+                    </span>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+
+                    <strong>#INV-2482</strong>
+
+                </td>
+
+                <td>
+
+                    Bonus Premium
+
+                </td>
+
+                <td>
+
+                    535 $
+
+                </td>
+
+                <td>
+
+                    09 Juillet 2026
+
+                </td>
+
+                <td>
+
+                    Instantané
+
+                </td>
+
+                <td class="green">
+
+                    +535 $
+
+                </td>
+
+                <td>
+
+                    <span class="status blue">
+
+                        VALIDÉ
+
+                    </span>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+
+                    <strong>#RET-3021</strong>
+
+                </td>
+
+                <td>
+
+                    Retrait
+
+                </td>
+
+                <td>
+
+                    2 000 $
+
+                </td>
+
+                <td>
+
+                    12 Juillet 2026
+
+                </td>
+
+                <td>
+
+                    En attente
+
+                </td>
+
+                <td class="red">
+
+                    -2 000 $
+
+                </td>
+
+                <td>
+
+                    <span class="status"
+                    style="background:#3d2500;color:#ffcb45;">
+
+                        EN ATTENTE
+
+                    </span>
+
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+</div>
+
+<!-- ==========================
+     SÉCURITÉ
+========================== -->
+
+<div class="footer-security">
+
+    <div class="security-item">
+
+        <div class="security-icon">
+
+            🛡️
+
+        </div>
+
+        <div>
+
+            <div style="font-weight:700;">
+
+                Compte sécurisé
+
+            </div>
+
+            <div style="margin-top:5px;color:#94a3b8;">
+
+                Protection multicouche.
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="security-item">
+
+        <div class="security-icon">
+
+            🔒
+
+        </div>
+
+        <div>
+
+            <div style="font-weight:700;">
+
+                Cryptage SSL
+
+            </div>
+
+            <div style="margin-top:5px;color:#94a3b8;">
+
+                Transactions sécurisées.
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="security-item">
+
+        <div class="security-icon">
+
+            💳
+
+        </div>
+
+        <div>
+
+            <div style="font-weight:700;">
+
+                Paiements sécurisés
+
+            </div>
+
+            <div style="margin-top:5px;color:#94a3b8;">
+
+                M-Pesa RDC.
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="security-item">
+
+        <div class="security-icon">
+
+            📞
+
+        </div>
+
+        <div>
+
+            <div style="font-weight:700;">
+
+                Support Premium
+
+            </div>
+
+            <div style="margin-top:5px;color:#94a3b8;">
+
+                Disponible 24h/24.
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</main>
+
+</div>
+<script>
+
+const ctx = document.getElementById("chart");
+
+new Chart(ctx,{
+
+type:"line",
+
+data:{
+
+labels:[
+
+"08 Juil",
+
+"09 Juil",
+
+"10 Juil",
+
+"11 Juil",
+
+"12 Juil",
+
+"13 Juil",
+
+"14 Juil",
+
+"15 Juil"
+
+],
+
+datasets:[{
+
+label:"Solde ($)",
+
+data:[
+
+2100,
+
+3500,
+
+6200,
+
+9100,
+
+12500,
+
+15800,
+
+18700,
+
+20635
+
+],
+
+borderColor:"#2b7fff",
+
+backgroundColor:"rgba(43,127,255,.18)",
+
+fill:true,
+
+tension:.45,
+
+pointRadius:3,
+
+pointHoverRadius:5,
+
+pointBackgroundColor:"#2b7fff",
+
+borderWidth:2,
+
+}]
+
+},
+
+options:{
+
+responsive:true,
+
+responsive:true,
+maintainAspectRatio:false,
+aspectRatio:2.2,
+
+plugins:{
+
+legend:{
+
+display:false
+
+},
+
+tooltip:{
+
+backgroundColor:"#091321",
+
+titleColor:"#fff",
+
+bodyColor:"#fff",
+
+displayColors:false,
+
+callbacks:{
+
+label:function(context){
+
+return " "+context.parsed.y.toLocaleString()+" $";
+
+}
+
+}
+
+}
+
+},
+
+scales:{
+
+x:{
+
+ticks:{
+
+color:"#94a3b8"
+
+},
+
+grid:{
+
+color:"rgba(255,255,255,.04)"
+
+}
+
+},
+
+y:{
+
+ticks:{
+
+color:"#94a3b8",
+
+callback:function(value){
+
+return value+" $";
+
+}
+
+},
+
+grid:{
+
+color:"rgba(255,255,255,.04)"
+
+}
+
+}
+
+}
+
+}
+
+});
+
+/* ===========================
+SOLDE
+=========================== */
+
+const soldeDisponible=20635;
+
+/* ===========================
+MENU
+=========================== */
+
+document.querySelectorAll(".menu-item").forEach(item=>{
+
+item.addEventListener("click",function(){
+
+document.querySelectorAll(".menu-item").forEach(i=>{
+
+i.classList.remove("active");
+
+});
+
+this.classList.add("active");
+
+});
+
+});
+
+/* ===========================
+SUPPORT
+=========================== */
+
+const support=document.querySelector(".support-btn");
+
+if(support){
+
+support.onclick=function(){
+
+alert("Notre équipe Premium est disponible 24h/24.");
+
+};
+
+}
+
+/* ===========================
+HOVER CARD
+=========================== */
+
+document.querySelectorAll(".card").forEach(card=>{
+
+card.addEventListener("mousemove",()=>{
+
+card.style.transform="translateY(-8px) scale(1.02)";
+
+});
+
+card.addEventListener("mouseleave",()=>{
+
+card.style.transform="translateY(0px)";
+
+});
+
+});
+
+/* ===========================
+COMPTE
+=========================== */
+
+const statut=document.querySelector(".red");
+
+if(statut){
+
+setInterval(()=>{
+
+statut.style.opacity=".45";
+
+setTimeout(()=>{
+
+statut.style.opacity="1";
+
+},600);
+
+},1500);
+
+}
+
+/* ===========================
+HORLOGE
+=========================== */
+
+function updateClock(){
+
+const now=new Date();
+
+const heure=now.toLocaleTimeString();
+
+document.title="Africa Investment | "+heure;
+
+}
+
+setInterval(updateClock,1000);
+
+updateClock();
+
+</script>
+
+</body>
+
+</html>
